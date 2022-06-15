@@ -7,15 +7,16 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseTimeEntity {
+public class Users extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String login;
@@ -24,7 +25,7 @@ public class User extends BaseTimeEntity {
     private String email;
 
     @Builder
-    public User (String login, String password, String nickname, String email) {
+    public Users(String login, String password, String nickname, String email) {
         this.login = login;
         this.password = password;
         this.nickname = nickname;
