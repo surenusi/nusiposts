@@ -1,13 +1,10 @@
 package com.surenusi.springbootposts.dto.posts;
 
 import com.surenusi.springbootposts.domain.Posts;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostsSaveRequestDto {
 
     private String title;

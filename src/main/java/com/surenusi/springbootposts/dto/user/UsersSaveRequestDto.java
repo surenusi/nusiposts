@@ -1,13 +1,10 @@
 package com.surenusi.springbootposts.dto.user;
 
 import com.surenusi.springbootposts.domain.Users;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UsersSaveRequestDto {
 
     private String login;
