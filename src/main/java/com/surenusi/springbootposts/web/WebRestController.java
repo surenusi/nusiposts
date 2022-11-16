@@ -1,7 +1,7 @@
 package com.surenusi.springbootposts.web;
 
 import com.surenusi.springbootposts.dto.posts.PostsSaveRequestDto;
-import com.surenusi.springbootposts.repository.PostsRepository;
+import com.surenusi.springbootposts.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class WebRestController {
 
-    private final PostsRepository postsRepository;
+    private final PostsService postsService;
 
-    @PostMapping("/posts")
-    public void savePosts(@RequestBody PostsSaveRequestDto dto) {
-        postsRepository.save(dto.toEntity());
+    @PostMapping("/createPost")
+    public void createPost(@RequestBody PostsSaveRequestDto dto) {
+        postsService.createPost(dto);
     }
 }
