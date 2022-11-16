@@ -17,11 +17,12 @@ public class PostsService {
     private final PostsRepository postsRepository;
 
     @Transactional
-    public Long save(PostsSaveRequestDto dto) {
+    public Long createPost(PostsSaveRequestDto dto) {
         return postsRepository.save(dto.toEntity()).getId();
     }
 
-    public List<PostsMainResponseDto> findAllDesc() {
+    @Transactional(readOnly = true)
+    public List<PostsMainResponseDto> readAllPosts() {
         return postsRepository.findByOrderByIdDesc()
                 .map(PostsMainResponseDto::new)
                 .collect(Collectors.toList());

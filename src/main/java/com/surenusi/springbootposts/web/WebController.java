@@ -13,8 +13,8 @@ public class WebController {
     private final PostsService postsService;
 
     @GetMapping("/")
-    public String main(Model model) {
-        model.addAttribute("posts", postsService.findAllDesc());
+    public String readAllPosts(Model model) {
+        model.addAttribute("posts", postsService.readAllPosts());
         return "main";
     }
 }

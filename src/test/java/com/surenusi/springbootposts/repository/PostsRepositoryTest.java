@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootTest
-@EnableJpaAuditing
 public class PostsRepositoryTest {
 
     @Autowired
@@ -39,6 +38,7 @@ public class PostsRepositoryTest {
         Assertions.assertThat(posts.getTitle()).isEqualTo("테스트 제목");
         Assertions.assertThat(posts.getContent()).isEqualTo("테스트 내용");
         Assertions.assertThat(posts.getAuthor()).isEqualTo("테스트 작성자");
+        Assertions.assertThat(posts.getViewCount()).isEqualTo(0);
         Assertions.assertThat(posts.getCreatedDate()).isBefore(LocalDateTime.now());
         Assertions.assertThat(posts.getModifiedDate()).isBefore(LocalDateTime.now());
     }
