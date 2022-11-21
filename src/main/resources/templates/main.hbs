@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>스프링부트</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name ="viewport" content="width=device-width, initial-scale=1"/>
+
+        <!--부트스트랩 css-->
+        <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+    </head>
+    <body>
+        <!-- 게시판 테이블 -->
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead">
+                    <tr>
+                        <th>글번호</th>
+                        <th>제목</th>
+                        <th>글쓴이</th>
+                        <th>작성일</th>
+                        <th>조회수</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                {{#each posts}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{title}}</td>
+                        <td>{{author}}</td>
+                        <td>{{createdDate}}</td>
+                        <td>{{viewCount}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary">글등록</button>
+        </div>
+
+        <!--부트스트랩 js, jquery-->
+        <script src="/js/lib/bootstrap.min.js"></script>
+        <script src="/js/lib/jquery.min.js"></script>
+    </body>
+</html>
