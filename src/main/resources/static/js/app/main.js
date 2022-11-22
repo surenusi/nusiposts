@@ -2,7 +2,7 @@ var main = {
     init : function () {
         var _this = this;
         $('#btn-create').on('click', function () {
-            _this.save();
+            _this.create();
         });
     },
     create : function () {
@@ -14,15 +14,17 @@ var main = {
 
         $.ajax({
             type: 'POST',
-            url: '/posts',
-            dataType: 'json',
+            url: '/createPost',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
-            alert('글이 등록되었습니다.');
-            location.reload();
-        }).fail(function (error) {
-            alert(error);
+            data: JSON.stringify(data),
+            success: function() {
+                alert('글을 등록하였습니다.');
+                location.reload();
+            },
+            error: function(error) {
+                alert('글 등록에 실패하였습니다.');
+                console.log(error);
+            }
         });
     }
 
