@@ -15,6 +15,7 @@ public class PostsMainResponseDto {
     private String content;
     private String author;
     private int viewCount;
+    private String createdDate;
     private String modifiedDate;
 
     public PostsMainResponseDto(Posts posts) {
@@ -23,6 +24,8 @@ public class PostsMainResponseDto {
         content = posts.getContent();
         author = posts.getAuthor();
         viewCount = posts.getViewCount();
+
+        createdDate = toStringDateTime(posts.getCreatedDate());
         modifiedDate = toStringDateTime(posts.getModifiedDate());
     }
 
