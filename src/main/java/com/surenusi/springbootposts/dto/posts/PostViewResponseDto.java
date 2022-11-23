@@ -8,27 +8,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Getter
-public class PostsMainResponseDto {
-
+public class PostViewResponseDto {
     private Long id;
     private String title;
     private String author;
+    private String content;
     private int viewCount;
     private String createdDate;
-    private String modifiedDate;
+    private String modifidedData;
 
-    public PostsMainResponseDto(Posts posts) {
+    public PostViewResponseDto(Posts posts) {
         id = posts.getId();
         title = posts.getTitle();
         author = posts.getAuthor();
+        content = posts.getContent();
         viewCount = posts.getViewCount();
         createdDate = toStringDateTime(posts.getCreatedDate());
-        modifiedDate = toStringDateTime(posts.getModifiedDate());
+        modifidedData = toStringDateTime(posts.getModifiedDate());
     }
 
     //LocalDateTime타입 -> String타입 형변환
     public String toStringDateTime(LocalDateTime localDateTime) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss");
         return Optional.ofNullable(localDateTime)
                 .map(dateTimeFormatter::format)
                 .orElse("");

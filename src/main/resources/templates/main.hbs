@@ -27,7 +27,11 @@
                 {{#each posts}}
                     <tr>
                         <td>{{id}}</td>
-                        <td class="text-start">{{title}}</td>
+                        <td class="text-start">
+                            <a href="/view/?id={{id}}"> 
+                                {{title}}
+                            </a>
+                        </td>
                         <td>{{author}}</td>
                         <td>{{createdDate}}</td>
                         <td>{{viewCount}}</td>
