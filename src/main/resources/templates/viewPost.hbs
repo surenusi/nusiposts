@@ -5,8 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>스프링부트</title>
+
+    <!--부트스트랩 css-->
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
 </head>
 <body>
-    
+
+    <!--게시글 출력 영역-->
+    <div class="container-lg">
+        {{#post}}
+        <div class="md-3"><hr></div>
+        <div class="row md-2">
+            <div class="col">
+                <h2>
+                    {{title}}
+                </h2>
+            </div>
+        </div>
+        <div class="row md-2">
+            <div class="col-7">
+                {{author}}
+            </div>
+            <div class="col-3">
+                {{createdDate}}
+            </div>
+            <div class="col">
+                조회수 <div class="vr"></div> {{viewCount}}
+            </div>
+        </div>
+        <div class="md-5"><hr></div>
+        <div class="col md-2">
+            {{content}}
+        </div>
+        {{/post}}
+    </div>
+
+    <!--부트스트랩js, jquery-->
+    <script src="/js/lib/bootstrap.min.js"></script>
+    <script src="/js/lib/jquery.min.js"></script>
 </body>
 </html>
