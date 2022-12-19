@@ -5,21 +5,23 @@ import com.surenusi.springbootposts.domain.Posts;
 import lombok.Getter;
 
 @Getter
-public class PostsMainResponseDto {
+public class PostViewResponseDto {
 
     private Long id;
     private String title;
     private String author;
+    private String content;
     private int viewCount;
     private String createdDate;
-    private String modifiedDate;
+    private String modifidedData;
 
-    public PostsMainResponseDto(Posts posts) {
+    public PostViewResponseDto(Posts posts) {
         id = posts.getId();
         title = posts.getTitle();
         author = posts.getAuthor();
+        content = posts.getContent();
         viewCount = posts.getViewCount();
         createdDate = Util.toStringDateTime(posts.getCreatedDate());
-        modifiedDate = Util.toStringDateTime(posts.getModifiedDate());
+        modifidedData = Util.toStringDateTime(posts.getModifiedDate());
     }
 }

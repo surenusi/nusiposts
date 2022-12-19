@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>스프링부트</title>
+
+    <!--부트스트랩 css-->
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
+
+    <!--custom css-->
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/viewPost.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-home">홈</div>
+        <div class="nav-button-container">
+          <div class="button button-secondary">회원가입</div>
+          <div class="button button-primary">로그인</div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <aside class="button-container">
+        <div class="button button-warn">삭제</div>
+        <div class="button button-primary">수정</div>
+      </aside>
+      {{#post}}
+        <div class="post-container">
+          <hr />
+          <div class="post-title">{{title}}</div>
+          <hr />
+          <div class="post-information-container">
+            <div class="post-information-box">
+              <div class="post-information">{{author}}</div>
+            </div>
+            <ul class="post-information-box">
+              <li class="post-information">조회수</li>
+              <li class="post-information">{{viewCount}}</li>
+              <li class="post-information">|</li>
+              <li class="post-information">작성일</li>
+              <li class="post-information">{{createdDate}}</li>
+            </ul>
+          </div>
+          <hr />
+          <div class="post-content">{{content}}</div>
+        </div>
+      {{/post}}
+    </main>
+    <footer></footer>
+  </body>
+</html>

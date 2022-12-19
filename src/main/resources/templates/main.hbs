@@ -1,81 +1,122 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <title>스프링부트</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name ="viewport" content="width=device-width, initial-scale=1"/>
+  <head>
+    <title>스프링부트</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!--부트스트랩 css-->
-        <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
-    </head>
-    <body>
-        <!--게시판 테이블-->
-        <div class="container-lg">
-            <main class="text-center">
-            <table class="table table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th class="col-lg">글번호</th>
-                        <th class="col-lg-5">제목</th>
-                        <th class="col-lg-3">글쓴이</th>
-                        <th class="col-lg-2">작성일</th>
-                        <th class="col-lg">조회수</th>
-                    </tr>
-                </thead>
-                <!--글 목록 출력 영역-->
-                <tbody id="tbody">
-                {{#each posts}}
-                    <tr>
-                        <td>{{id}}</td>
-                        <td class="text-start">{{title}}</td>
-                        <td>{{author}}</td>
-                        <td>{{createdDate}}</td>
-                        <td>{{viewCount}}</td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPostsModal">글쓰기</button>
-            </main>
+    <!--부트스트랩 css-->
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
+  </head>
+  <body>
+    <!--게시판 테이블-->
+    <div class="container-lg">
+      <main class="text-center">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th class="col-lg">글번호</th>
+              <th class="col-lg-5">제목</th>
+              <th class="col-lg-3">글쓴이</th>
+              <th class="col-lg-2">작성일</th>
+              <th class="col-lg">조회수</th>
+            </tr>
+          </thead>
+          <!--글 목록 출력 영역-->
+          <tbody id="tbody">
+            {{#each posts}}
+              <tr>
+                <td>{{id}}</td>
+                <td class="text-start">
+                  <a href="/view/{{id}}">
+                    {{title}}
+                  </a>
+                </td>
+                <td>{{author}}</td>
+                <td>{{createdDate}}</td>
+                <td>{{viewCount}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#createPostsModal"
+        >글쓰기</button>
+      </main>
+    </div>
+
+    <!--글쓰기 Modal-->
+    <div
+      class="modal fade"
+      id="createPostsModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="createPostsModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createPostsLabel">글쓰기</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="author"
+                  placeholder="닉네임"
+                />
+              </div>
+              <div class="mb-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  placeholder="제목을 입력해주세요."
+                />
+              </div>
+              <div class="mb-3">
+                <textarea
+                  class="form-control"
+                  id="content"
+                  rows="20"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >취소</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="btn-create"
+            >등록</button>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <!--글쓰기 Modal-->
-        <div class="modal fade" id="createPostsModal" tabindex="-1" role="dialog" aria-labelledby="createPostsModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createPostsLabel">글쓰기</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" id="author" placeholder="닉네임">
-                            </div>
-                            <div class="mb-4">
-                                <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요.">
-                            </div>
-                            <div class="mb-3">
-                                <textarea class="form-control" id="content" rows="20"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary" id="btn-create">등록</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+    <!--부트스트랩 js, jquery-->
+    <script src="/js/lib/bootstrap.min.js"></script>
+    <script src="/js/lib/jquery.min.js"></script>
 
-        <!--부트스트랩 js, jquery-->
-        <script src="/js/lib/bootstrap.min.js"></script>
-        <script src="/js/lib/jquery.min.js"></script>
-
-        <!--main페이지 커스텀js-->
-        <script src="/js/app/main.js"></script>
-    </body>
+    <!--main페이지 커스텀js-->
+    <script src="/js/app/main.js"></script>
+  </body>
 </html>

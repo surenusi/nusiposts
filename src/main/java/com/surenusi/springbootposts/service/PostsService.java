@@ -1,5 +1,6 @@
 package com.surenusi.springbootposts.service;
 
+import com.surenusi.springbootposts.dto.posts.PostViewResponseDto;
 import com.surenusi.springbootposts.dto.posts.PostsMainResponseDto;
 import com.surenusi.springbootposts.dto.posts.PostsSaveRequestDto;
 import com.surenusi.springbootposts.repository.PostsRepository;
@@ -26,5 +27,10 @@ public class PostsService {
         return postsRepository.findByOrderByIdDesc()
                 .map(PostsMainResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public PostViewResponseDto readPost(Long id) {
+        return new PostViewResponseDto(postsRepository.findOneById(id));
     }
 }
