@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,8 +19,8 @@ public class WebController {
         return "main";
     }
 
-    @GetMapping("/view/")
-    public String readPost(@RequestParam(value = "id") Long id, Model model) {
+    @GetMapping("/view/{postId}")
+    public String readPost(@PathVariable(name = "postId") Long id, Model model) {
         model.addAttribute("post", postsService.readPost(id));
         return "viewPost";
     }
