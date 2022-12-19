@@ -1,0 +1,60 @@
+:root {
+  --headingColor: rgb(43, 45, 66);
+  --primaryColor: rgb(141, 153, 174);
+  --secondaryColor: #edf2f4;
+  --submitColor: #335c67;
+  --red: #d90429;
+  --lightRed: #ef233c;
+}
+
+* {
+  color: var(--secondaryColor);
+}
+
+hr {
+  margin: 0;
+}
+
+ul {
+  display: flex;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 8px 4px 4px 4px;
+}
+
+.post-container {
+  min-height: 100%;
+}
+
+.post-title {
+  padding: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: var(--headingColor);
+}
+
+.post-information-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 8px;
+}
+
+.post-information {
+  margin-right: 6px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.post-content {
+  max-width: 100%;
+  padding: 8px 8px;
+  font-weight: 400;
+}

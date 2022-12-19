@@ -1,47 +1,54 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>스프링부트</title>
 
     <!--부트스트랩 css-->
-    <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
 
-    <!--게시글 출력 영역-->
-    <div class="container-lg">
-        {{#post}}
-        <div class="md-3"><hr></div>
-        <div class="row md-2">
-            <div class="col">
-                <h2>
-                    {{title}}
-                </h2>
-            </div>
+    <!--custom css-->
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/viewPost.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-home">홈</div>
+        <div class="nav-button-container">
+          <div class="button button-secondary">회원가입</div>
+          <div class="button button-primary">로그인</div>
         </div>
-        <div class="row md-2">
-            <div class="col-7">
-                {{author}}
+      </nav>
+    </header>
+    <main>
+      <aside class="button-container">
+        <div class="button button-warn">삭제</div>
+        <div class="button button-primary">수정</div>
+      </aside>
+      {{#post}}
+        <div class="post-container">
+          <hr />
+          <div class="post-title">{{title}}</div>
+          <hr />
+          <div class="post-information-container">
+            <div class="post-information-box">
+              <div class="post-information">{{author}}</div>
             </div>
-            <div class="col-3">
-                {{createdDate}}
-            </div>
-            <div class="col">
-                조회수 <div class="vr"></div> {{viewCount}}
-            </div>
+            <ul class="post-information-box">
+              <li class="post-information">조회수</li>
+              <li class="post-information">{{viewCount}}</li>
+              <li class="post-information">|</li>
+              <li class="post-information">작성일</li>
+              <li class="post-information">{{createdDate}}</li>
+            </ul>
+          </div>
+          <hr />
+          <div class="post-content">{{content}}</div>
         </div>
-        <div class="md-5"><hr></div>
-        <div class="col md-2">
-            {{content}}
-        </div>
-        {{/post}}
-    </div>
-
-    <!--부트스트랩js, jquery-->
-    <script src="/js/lib/bootstrap.min.js"></script>
-    <script src="/js/lib/jquery.min.js"></script>
-</body>
+      {{/post}}
+    </main>
+    <footer></footer>
+  </body>
 </html>
