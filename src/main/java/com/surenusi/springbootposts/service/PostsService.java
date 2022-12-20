@@ -1,8 +1,10 @@
 package com.surenusi.springbootposts.service;
 
+import com.surenusi.springbootposts.domain.Posts;
 import com.surenusi.springbootposts.dto.posts.PostViewResponseDto;
 import com.surenusi.springbootposts.dto.posts.PostsMainResponseDto;
 import com.surenusi.springbootposts.dto.posts.PostsSaveRequestDto;
+import com.surenusi.springbootposts.dto.posts.PostsUpdateRequestDto;
 import com.surenusi.springbootposts.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,5 +34,13 @@ public class PostsService {
     @Transactional(readOnly = true)
     public PostViewResponseDto readPost(Long id) {
         return new PostViewResponseDto(postsRepository.findOneById(id));
+    }
+
+    @Transactional
+    public Long updatePost(Long id, PostsUpdateRequestDto dto) {
+        Posts posts = postsRepository.findOneById(id);
+        posts.update(dto.getTitle(), dto.getContent());
+
+        return posts.getId();
     }
 }
