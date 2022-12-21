@@ -31,4 +31,10 @@ public class Posts extends BaseTimeEntity {
         this.content = content;
         this.author = author;
     }
+
+    //update 비즈니스 로직
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }

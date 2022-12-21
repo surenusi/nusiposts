@@ -24,9 +24,61 @@
     </header>
     <main>
       <aside class="button-container">
-        <div class="button button-warn">삭제</div>
-        <div class="button button-primary">수정</div>
+        <div class="button button-warn" id="delete-button">삭제</div>
+        <div
+          class="button button-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#updatePostsModal"
+        >수정</div>
       </aside>
+      <div
+        class="modal fade"
+        id="updatePostsModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="updatePostsModal"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-lg"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">글수정</h5>
+            </div>
+            <div class="modal-body">
+              {{#post}}
+                <form>
+                  <input type="hidden" id="post-id" value={{id}} />
+                  <div class="mb-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="title"
+                      value={{title}}
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <textarea
+                      class="form-control"
+                      id="content"
+                      rows="20"
+                    >{{content}}</textarea>
+                  </div>
+                </form>
+              {{/post}}
+            </div>
+            <div class="modal-footer">
+              <div
+                class="button button-secondary"
+                data-bs-dismiss="modal"
+              >취소</div>
+              <div class="button button-primary" id="update-button">수정</div>
+            </div>
+          </div>
+        </div>
+      </div>
       {{#post}}
         <div class="post-container">
           <hr />
@@ -49,6 +101,14 @@
         </div>
       {{/post}}
     </main>
-    <footer></footer>
+    <footer>
+    </footer>
+
+    <!--부트스트랩 js, jquery-->
+    <script src="/js/lib/bootstrap.min.js"></script>
+    <script src="/js/lib/jquery.min.js"></script>
+
+    <!--custom js-->
+    <script src="/js/app/viewPost.js"></script>
   </body>
 </html>
