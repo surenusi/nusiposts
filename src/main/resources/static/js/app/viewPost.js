@@ -1,3 +1,5 @@
+var requestUrl = "/post/" + $("#post-id").val();
+
 var main = {
   init: function () {
     var _this = this;
@@ -13,7 +15,18 @@ var main = {
     var deleteConfirm = confirm("게시글을 삭제하시겠습니까?");
     if (deleteConfirm) {
       //yes
-      alert("삭제했습니다.");
+      $.ajax({
+        type: "DELETE",
+        url: requestUrl,
+        success: function () {
+          alert("글을 삭제하였습니다.");
+          location.replace("http://localhost:8080/");
+        },
+        error: function () {
+          alert("글 삭제에 실패하였습니다");
+          console.log(error);
+        },
+      });
     } else {
       //no
     }
@@ -25,11 +38,9 @@ var main = {
       content: $("#content").val(),
     };
 
-    var requestUrl = "/updatePost/" + $("#post-id").val();
-
     $.ajax({
       type: "PUT",
-      url: requestUrl,
+      url: "/updatePost/" + $("#post-id").val(),
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify(data),
       success: function () {

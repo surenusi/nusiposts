@@ -43,4 +43,10 @@ public class PostsService {
 
         return posts.getId();
     }
+
+    @Transactional
+    public void deletePost(Long id) {
+        postsRepository.deleteById(id);
+        return;
+    }
 }
