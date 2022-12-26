@@ -19,4 +19,11 @@ public class WebRestController {
     public Long updatePost(@PathVariable(name = "postId") Long id, @RequestBody PostsUpdateRequestDto dto) {
         return postsService.updatePost(id, dto);
     }
+
+    @DeleteMapping("/post/{postId}")
+    public void deletePost(@PathVariable(name = "postId") Long id) {
+        postsService.deletePost(id);
+
+        return;
+    }
 }

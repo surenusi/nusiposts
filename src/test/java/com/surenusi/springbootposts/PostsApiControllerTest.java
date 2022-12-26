@@ -91,4 +91,25 @@ public class PostsApiControllerTest {
         Assertions.assertThat(posts.get(0).getContent()).isEqualTo(updateContent);
     }
 
+    @Test
+    public void deletePost() throws Exception {
+        //given
+        Posts post = postsRepository
+                .save(Posts.builder()
+                        .title("테스트제목")
+                        .content("테스트내용")
+                        .author("테스트작성자")
+                        .build());
+        Long deleteId = post.getId();
+        HttpEntity<Posts> requestEntity = new HttpEntity<>(post);
+        //when
+        ResponseEntity<Long> responseEntity = restTemplate.exchange("http://localhost:" + port + "/post/" + deleteId,
+                HttpMethod.DELETE, requestEntity, Long.class);
+        //then
+        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        List<Posts> posts = postsRepository.findAll();
+        Assertions.assertThat(posts.size()).isEqualTo(0);
+    }
+
 }
