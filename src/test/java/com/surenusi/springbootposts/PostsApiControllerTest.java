@@ -4,7 +4,6 @@ import com.surenusi.springbootposts.domain.Posts;
 import com.surenusi.springbootposts.dto.posts.PostsSaveRequestDto;
 import com.surenusi.springbootposts.dto.posts.PostsUpdateRequestDto;
 import com.surenusi.springbootposts.repository.PostsRepository;
-import org.apache.coyote.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
