@@ -4,7 +4,6 @@ import com.surenusi.springbootposts.domain.Posts;
 import com.surenusi.springbootposts.dto.posts.PostsSaveRequestDto;
 import com.surenusi.springbootposts.dto.posts.PostsUpdateRequestDto;
 import com.surenusi.springbootposts.repository.PostsRepository;
-import org.apache.coyote.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -80,7 +79,7 @@ public class PostsApiControllerTest {
         //when
         ResponseEntity<Long> responseEntity =
                 restTemplate
-                        .exchange("http://localhost:" + port + "/updatePost/" + updateId
+                        .exchange("http://localhost:" + port + "/post/" + updateId
                                 , HttpMethod.PUT, requestEntity, Long.class );
         //then
         Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
