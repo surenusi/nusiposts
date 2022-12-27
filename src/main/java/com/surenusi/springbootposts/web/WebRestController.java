@@ -15,7 +15,7 @@ public class WebRestController {
     @PostMapping("/createPost")
     public Long createPost(@RequestBody PostsSaveRequestDto dto) { return postsService.createPost(dto); }
 
-    @PutMapping("/updatePost/{postId}")
+    @PutMapping("/post/{postId}")
     public Long updatePost(@PathVariable(name = "postId") Long id, @RequestBody PostsUpdateRequestDto dto) {
         return postsService.updatePost(id, dto);
     }

@@ -79,7 +79,7 @@ public class PostsApiControllerTest {
         //when
         ResponseEntity<Long> responseEntity =
                 restTemplate
-                        .exchange("http://localhost:" + port + "/updatePost/" + updateId
+                        .exchange("http://localhost:" + port + "/post/" + updateId
                                 , HttpMethod.PUT, requestEntity, Long.class );
         //then
         Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
