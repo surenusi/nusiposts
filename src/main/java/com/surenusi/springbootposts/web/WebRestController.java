@@ -12,7 +12,7 @@ public class WebRestController {
 
     private final PostsService postsService;
 
-    @PostMapping("/createPost")
+    @PostMapping("/post")
     public Long createPost(@RequestBody PostsSaveRequestDto dto) { return postsService.createPost(dto); }
 
     @PutMapping("/post/{postId}")
