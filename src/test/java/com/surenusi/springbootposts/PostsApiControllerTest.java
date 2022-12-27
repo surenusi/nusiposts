@@ -45,7 +45,7 @@ public class PostsApiControllerTest {
                 .build();
         //when
         ResponseEntity<Long> responseEntity =
-                restTemplate.postForEntity("http://localhost:" + port + "/createPost", dto, Long.class);
+                restTemplate.postForEntity("http://localhost:" + port + "/post", dto, Long.class);
         //then
         Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(responseEntity.getBody()).isGreaterThan(0L);
