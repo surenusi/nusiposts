@@ -2,7 +2,9 @@ package com.surenusi.springbootposts.web;
 
 import com.surenusi.springbootposts.dto.posts.PostsSaveRequestDto;
 import com.surenusi.springbootposts.dto.posts.PostsUpdateRequestDto;
+import com.surenusi.springbootposts.dto.user.UsersSaveRequestDto;
 import com.surenusi.springbootposts.service.PostsService;
+import com.surenusi.springbootposts.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class WebRestController {
 
     private final PostsService postsService;
+    private final UsersService usersService;
 
     @PostMapping("/post")
     public Long createPost(@RequestBody PostsSaveRequestDto dto) { return postsService.createPost(dto); }
@@ -26,4 +29,7 @@ public class WebRestController {
 
         return;
     }
+    
+    @PostMapping("/users")
+    public Long createUsers(@RequestBody UsersSaveRequestDto reqeustDto) { return usersService.createUsers(reqeustDto); }
 }
