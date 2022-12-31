@@ -31,4 +31,11 @@ public class Users extends BaseTimeEntity {
         this.nickname = nickname;
         this.email = email;
     }
+
+    //유저 정보 수정 비즈니스 로직
+    public void update(String password, String nickname, String email) {
+        this.password = password;
+        this.nickname = nickname;
+        this.email = email;
+    }
 }

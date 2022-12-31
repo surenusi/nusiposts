@@ -1,4 +1,4 @@
-package com.surenusi.springbootposts;
+package com.surenusi.springbootposts.api;
 
 import com.surenusi.springbootposts.domain.Posts;
 import com.surenusi.springbootposts.dto.posts.PostsSaveRequestDto;
