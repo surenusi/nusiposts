@@ -3,6 +3,7 @@ package com.surenusi.springbootposts.web;
 import com.surenusi.springbootposts.dto.posts.PostsSaveRequestDto;
 import com.surenusi.springbootposts.dto.posts.PostsUpdateRequestDto;
 import com.surenusi.springbootposts.dto.user.UsersSaveRequestDto;
+import com.surenusi.springbootposts.dto.user.UsersUpdateRequestDto;
 import com.surenusi.springbootposts.service.PostsService;
 import com.surenusi.springbootposts.service.UsersService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,19 @@ public class WebRestController {
 
         return;
     }
-    
-    @PostMapping("/users")
-    public Long createUsers(@RequestBody UsersSaveRequestDto reqeustDto) { return usersService.createUsers(reqeustDto); }
+
+    @PostMapping("/user")
+    public Long createUsers(@RequestBody UsersSaveRequestDto requestDto) { return usersService.createUsers(requestDto); }
+
+    @PutMapping("/user/{userId}")
+    public Long updateUsers(@PathVariable(name = "userId") Long userId,
+                            @RequestBody UsersUpdateRequestDto requestDto) {
+
+        return usersService.updateUsers(userId, requestDto);
+    }
+
+    @DeleteMapping("/user/{userId}")
+    public void deleteUsers(@PathVariable(name = "userId") Long userId) {
+        usersService.deleteUsers(userId);
+    }
 }
