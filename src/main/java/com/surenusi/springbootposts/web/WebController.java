@@ -22,8 +22,8 @@ public class WebController {
     }
 
     @GetMapping("/post/{postId}")
-    public String readPost(@PathVariable(name = "postId") Long id, Model model) {
-        model.addAttribute("post", postsService.readPost(id));
+    public String readPost(@PathVariable(name = "postId") Long postId, Model model) {
+        model.addAttribute("post", postsService.readPosts(postId));
         return "viewPost";
     }
 

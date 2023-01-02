@@ -17,16 +17,16 @@ public class WebRestController {
     private final UsersService usersService;
 
     @PostMapping("/post")
-    public Long createPost(@RequestBody PostsSaveRequestDto dto) { return postsService.createPost(dto); }
+    public Long createPost(@RequestBody PostsSaveRequestDto requestDto) { return postsService.createPosts(requestDto); }
 
     @PutMapping("/post/{postId}")
-    public Long updatePost(@PathVariable(name = "postId") Long id, @RequestBody PostsUpdateRequestDto dto) {
-        return postsService.updatePost(id, dto);
+    public Long updatePost(@PathVariable(name = "postId") Long postId, @RequestBody PostsUpdateRequestDto requestDto) {
+        return postsService.updatePosts(postId, requestDto);
     }
 
     @DeleteMapping("/post/{postId}")
-    public void deletePost(@PathVariable(name = "postId") Long id) {
-        postsService.deletePost(id);
+    public void deletePost(@PathVariable(name = "postId") Long postId) {
+        postsService.deletePosts(postId);
 
         return;
     }
