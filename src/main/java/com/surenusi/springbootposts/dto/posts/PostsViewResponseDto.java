@@ -5,7 +5,7 @@ import com.surenusi.springbootposts.domain.Posts;
 import lombok.Getter;
 
 @Getter
-public class PostViewResponseDto {
+public class PostsViewResponseDto {
 
     private Long id;
     private String title;
@@ -15,7 +15,7 @@ public class PostViewResponseDto {
     private String createdDate;
     private String modifidedData;
 
-    public PostViewResponseDto(Posts posts) {
+    public PostsViewResponseDto(Posts posts) {
         id = posts.getId();
         title = posts.getTitle();
         author = posts.getAuthor();
