@@ -28,8 +28,8 @@ public class WebController {
     }
 
     @GetMapping("/user/{userId}")
-    public String readUsers(@PathVariable(name = "usersId") Long userId, Model model) {
-        model.addAttribute("users", usersService.readUsers(userId));
+    public String readUsers(@PathVariable(name = "userId") Long userId, Model model) {
+        model.addAttribute("user", usersService.readUsers(userId));
         return "userInfo";
     }
 }
