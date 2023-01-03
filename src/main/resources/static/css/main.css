@@ -1,0 +1,89 @@
+:root {
+  --headingColor: rgb(43, 45, 66);
+  --primaryColor: rgb(141, 153, 174);
+  --secondaryColor: #edf2f4;
+  --submitColor: #335c67;
+  --red: #d90429;
+  --lightRed: #ef233c;
+}
+
+hr {
+  margin: 0px;
+  color: var(--headingColor);
+}
+
+* {
+  color: var(--secondaryColor);
+}
+
+.post-list {
+  margin: auto;
+}
+
+.vrow.column.head {
+  background-color: var(--headingColor);
+}
+
+.vrow-inner {
+  padding: 6px 8px;
+  display: flex;
+}
+
+.vrow-top,
+.vrow-bottom {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.vrow-top {
+  max-width: 60%;
+}
+
+.vrow-bottom {
+  max-width: 40%;
+}
+
+.vcol {
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.vrow.column.head .vcol.col-title,
+.vcol.col-id,
+.vcol.col-date,
+.vcol.col-views {
+  width: 100px;
+}
+
+.vcol.col-author {
+  width: 200px;
+}
+
+.vcol.col-title {
+  max-width: 80%;
+}
+
+.vcol.col-title,
+.vcol.col-author {
+  text-align: left;
+}
+
+.vcol {
+  margin-right: 16px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+main > .button {
+  align-self: flex-end;
+}
+
+.button {
+  margin: 12px 8px;
+}

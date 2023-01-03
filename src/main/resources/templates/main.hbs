@@ -1,51 +1,80 @@
-<html>
+<html lang="kr">
   <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>스프링부트</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!--부트스트랩 css-->
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
+
+    <!--custom css-->
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
-    <!--게시판 테이블-->
-    <div class="container-lg">
-      <main class="text-center">
-        <table class="table table-hover">
-          <thead class="table-dark">
-            <tr>
-              <th class="col-lg">글번호</th>
-              <th class="col-lg-5">제목</th>
-              <th class="col-lg-3">글쓴이</th>
-              <th class="col-lg-2">작성일</th>
-              <th class="col-lg">조회수</th>
-            </tr>
-          </thead>
-          <!--글 목록 출력 영역-->
-          <tbody id="tbody">
-            {{#each posts}}
-              <tr>
-                <td>{{id}}</td>
-                <td class="text-start">
-                  <a href="/post/{{id}}">
-                    {{title}}
-                  </a>
-                </td>
-                <td>{{author}}</td>
-                <td>{{createdDate}}</td>
-                <td>{{viewCount}}</td>
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#createPostsModal"
-        >글쓰기</button>
-      </main>
-    </div>
+    <!-- navbar -->
+    <header>
+      <nav>
+        <div class="nav-home">홈</div>
+        <div class="nav-button-container">
+          <div class="button button-secondary">회원가입</div>
+          <div class="button button-primary">로그인</div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- 게시글 리스트 -->
+    <main class="post-list col-xxl-8">
+      <!-- 상단 글쓰기 버튼 -->
+      <div
+        class="button button-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#createPostsModal"
+      >
+        글쓰기
+      </div>
+      <div class="vrow column head">
+        <div class="vrow-inner">
+          <div class="vrow-top">
+            <span class="vcol col-id">번호</span>
+            <span class="vcol col-title">제목</span>
+          </div>
+          <div class="vrow-bottom">
+            <span class="vcol col-author">글쓴이</span>
+            <span class="vcol col-date">작성일</span>
+            <span class="vcol col-views">조회수</span>
+          </div>
+        </div>
+      </div>
+      <!-- 글 출력 영역 -->
+      {{#each posts}}
+        <div class="vrow column">
+          <div class="vrow-inner">
+            <div class="vrow-top">
+              <span class="vcol col-id">{{id}}</span>
+              <span class="vcol col-title"><a
+                  href="/post/{{id}}"
+                >{{title}}</a></span>
+            </div>
+            <div class="vrow-bottom">
+              <span class="vcol col-author">{{author}}</span>
+              <span class="vcol col-date">{{createdDate}}</span>
+              <span class="vcol col-views">{{viewCount}}</span>
+            </div>
+          </div>
+        </div>
+        <hr />
+      {{/each}}
+      <!-- 하단 글쓰기 버튼 -->
+      <div
+        class="button button-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#createPostsModal"
+      >
+        글쓰기
+      </div>
+    </main>
 
     <!--글쓰기 Modal-->
     <div
@@ -101,22 +130,25 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
-            >취소</button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              id="btn-create"
-            >등록</button>
+            >
+              취소
+            </button>
+            <button type="button" class="btn btn-primary" id="btn-create">
+              등록
+            </button>
           </div>
         </div>
       </div>
     </div>
 
+    <footer></footer>
+
     <!--부트스트랩 js, jquery-->
     <script src="/js/lib/bootstrap.min.js"></script>
     <script src="/js/lib/jquery.min.js"></script>
 
-    <!--main페이지 커스텀js-->
+    <!-- custom js -->
     <script src="/js/app/main.js"></script>
+
   </body>
 </html>
