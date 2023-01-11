@@ -16,7 +16,7 @@ public class Users extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, length = 10)
+    @Column(unique = true, length = 12)
     private String login;
     @Column(length = 18)
     private String password;
