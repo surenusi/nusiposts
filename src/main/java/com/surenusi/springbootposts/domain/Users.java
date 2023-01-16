@@ -18,10 +18,12 @@ public class Users extends BaseTimeEntity {
 
     @Column(unique = true, length = 12)
     private String login;
-    @Column(length = 18)
+
     private String password;
+
     @Column(length = 20)
     private String nickname;
+
     @Column(unique = true)
     private String email;
 
