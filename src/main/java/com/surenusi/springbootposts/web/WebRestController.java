@@ -2,6 +2,7 @@ package com.surenusi.springbootposts.web;
 
 import com.surenusi.springbootposts.dto.posts.PostsSaveRequestDto;
 import com.surenusi.springbootposts.dto.posts.PostsUpdateRequestDto;
+import com.surenusi.springbootposts.dto.user.UsersInfoResponseDto;
 import com.surenusi.springbootposts.dto.user.UsersSaveRequestDto;
 import com.surenusi.springbootposts.dto.user.UsersUpdateRequestDto;
 import com.surenusi.springbootposts.service.PostsService;
@@ -44,5 +45,11 @@ public class WebRestController {
     @DeleteMapping("/user/{userId}")
     public void deleteUsers(@PathVariable(name = "userId") Long userId) {
         usersService.deleteUsers(userId);
+    }
+
+    //유저 아이디 중복 체크
+    @GetMapping("/user/check/{userLogin}")
+    public int checkUsersOverlap(@PathVariable(name = "userLogin") String userLogin) {
+        return usersService.countUsers(userLogin);
     }
 }
