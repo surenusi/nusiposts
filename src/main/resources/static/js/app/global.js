@@ -8,11 +8,15 @@ var main = {
     $("#btn-create-user").on("click", function () {
       _this.createUser();
     });
-    $("#login").on("input", function () {
+    $("#login").on("keyup paste", function () {
       _this.loginValid($(this));
       _this.loginCheck($(this));
     });
+    $("#nickname").on("keyup paste", function () {
+      _this.nicknameValid($(this));
+    });
   },
+
   createUser: function () {
     var data = {
       login: $("#login").val(),
@@ -38,11 +42,15 @@ var main = {
 
   //아이디 유효성 검사
   loginValid: function (input) {
-    var loginRegType = /^[A-Za-z0-9]{6,12}$/;
+    var loginRegType = /^[A-Z|a-z|0-9]{6,12}$/;
 
     if (loginRegType.test(input.val())) {
       //사용가능한 아이디
       input.removeClass("is-invalid").addClass("is-valid");
+      $("#login-feedback").html("");
+      $("#login-feedback")
+        .removeClass("invalid-feedback")
+        .addClass("valid-feedback");
       isLoginValid = true;
     } else {
       //사용할 수 없는 아이디
@@ -58,10 +66,9 @@ var main = {
   //아이디 중복 검사
   loginCheck: function (input) {
     //유효하지 않은 아이디는 중복 검사하지 않음
-    if (!isLoginValid) {
+    if (!isLoginValid || input.val() == "") {
       return;
     }
-
     if (timer) {
       clearTimeout(timer);
     }
@@ -95,6 +102,25 @@ var main = {
         },
       });
     }, 200);
+  },
+
+  //닉네임 유효성 검사
+  nicknameValid: function (input) {
+    var nicknameRegType = /^[A-Z|a-z|0-9|ㄱ-ㅎ|가-힣]{2,20}$/;
+
+    if (nicknameRegType.test(input.val())) {
+      //유효한 닉네임
+      input.removeClass("is-invalid").addClass("is-valid");
+      $("#nickname-feedback").html("");
+      $("#nickname-feedback").removeClass("invalid-feedback");
+    } else {
+      //유효하지 않은 닉네임
+      input.removeClass("is-valid").addClass("is-invalid");
+      $("#nickname-feedback").html(
+        "2~20자 이내의 한글, 영문, 숫자만 사용 가능합니다."
+      );
+      $("#nickname-feedback").addClass("invalid-feedback");
+    }
   },
 };
 
