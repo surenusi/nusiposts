@@ -15,6 +15,12 @@ var main = {
     $("#nickname").on("keyup paste", function () {
       _this.nicknameValid($(this));
     });
+    $("#password").on("keyup paste", function () {
+      _this.passwordValid($(this));
+    });
+    $("#reinput-password").on("keyup paste", function () {
+      _this.passwordCompare($(this));
+    });
   },
 
   createUser: function () {
@@ -42,7 +48,7 @@ var main = {
 
   //아이디 유효성 검사
   loginValid: function (input) {
-    var loginRegType = /^[A-Z|a-z|0-9]{6,12}$/;
+    var loginRegType = /^[A-Za-z0-9]{6,12}$/;
 
     if (loginRegType.test(input.val())) {
       //사용가능한 아이디
@@ -106,13 +112,15 @@ var main = {
 
   //닉네임 유효성 검사
   nicknameValid: function (input) {
-    var nicknameRegType = /^[A-Z|a-z|0-9|ㄱ-ㅎ|가-힣]{2,20}$/;
+    var nicknameRegType = /^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,20}$/;
 
     if (nicknameRegType.test(input.val())) {
       //유효한 닉네임
       input.removeClass("is-invalid").addClass("is-valid");
-      $("#nickname-feedback").html("");
-      $("#nickname-feedback").removeClass("invalid-feedback");
+      $("#nickname-feedback").html("사용 가능한 닉네임입니다.");
+      $("#nickname-feedback")
+        .removeClass("invalid-feedback")
+        .addClass("valid-feedback");
     } else {
       //유효하지 않은 닉네임
       input.removeClass("is-valid").addClass("is-invalid");
@@ -120,6 +128,58 @@ var main = {
         "2~20자 이내의 한글, 영문, 숫자만 사용 가능합니다."
       );
       $("#nickname-feedback").addClass("invalid-feedback");
+    }
+  },
+
+  //비밀번호 유효성 검사
+  passwordValid: function (input) {
+    var passwordRegType = /^[a-zA-Z0-9`~!@#$%^&*()-_=+]{6,24}$/;
+
+    //password 새로운 입력에 따른 비밀번호 재입력칸 초기화 작업
+    $("#reinput-password").removeClass("is-invalid is-valid");
+    $("#reinput-password").html("");
+    $("#reinput-password-feedback").removeClass(
+      "invalid-feedback valid-feedback"
+    );
+    $("#reinput-password-feedback").html("");
+
+    if (passwordRegType.test(input.val())) {
+      //유효한 비밀번호
+      input.removeClass("is-invalid").addClass("is-valid");
+      $("#password-feedback")
+        .removeClass("invalid-feedback")
+        .addClass("valid-feedback");
+      $("#password-feedback").html("사용 가능한 비밀번호입니다.");
+    } else {
+      //유효하지 않은 비밀번호
+      input.removeClass("is-valid").addClass("is-invalid");
+      $("#password-feedback")
+        .removeClass("valid-feedback")
+        .addClass("invalid-feedback");
+      $("#password-feedback").html(
+        "6~24자 이내의 영문, 숫자, 특수문자만 사용 가능합니다."
+      );
+    }
+  },
+
+  //비밀번호, 비밀번호 재입력 일치 여부 확인
+  passwordCompare: function (input) {
+    var password = $("#password").val();
+
+    if (password == input.val()) {
+      //비밀번호 일치
+      input.removeClass("is-invalid").addClass("is-valid");
+      $("#reinput-password-feedback")
+        .removeClass("invalid-feedback")
+        .addClass("valid-feedback");
+      $("#reinput-password-feedback").html("비밀번호가 일치합니다.");
+    } else {
+      //비밀번호 불일치
+      input.removeClass("is-valid").addClass("is-invalid");
+      $("#reinput-password-feedback")
+        .removeClass("valid-feedback")
+        .addClass("invalid-feedback");
+      $("#reinput-password-feedback").html("비밀번호가 일치하지 않습니다.");
     }
   },
 };
