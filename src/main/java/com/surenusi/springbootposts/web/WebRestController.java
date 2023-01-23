@@ -48,8 +48,14 @@ public class WebRestController {
     }
 
     //유저 아이디 중복 체크
-    @GetMapping("/user/check/{userLogin}")
-    public int checkUsersOverlap(@PathVariable(name = "userLogin") String userLogin) {
-        return usersService.countUsers(userLogin);
+    @GetMapping("/user/loginCheck/{userLogin}")
+    public int checkUsersLoginOverlap(@PathVariable(name = "userLogin") String userLogin) {
+        return usersService.countUsers("login", userLogin);
+    }
+
+    //유저 이메일 중복 체크
+    @GetMapping("/user/emailCheck/{userEmail}")
+    public int checkUsersEmailOverlap(@PathVariable(name = "userEmail") String userEmail) {
+        return usersService.countUsers("email", userEmail);
     }
 }

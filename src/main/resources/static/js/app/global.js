@@ -1,12 +1,13 @@
 var timer;
 
 var isLoginValid = false;
+var isEmailValid = false;
 
 var main = {
   init: function () {
     var _this = this;
     $("#btn-create-user").on("click", function () {
-      _this.createUser();
+      _this.checkForm();
     });
     $("#login").on("keyup paste", function () {
       _this.loginValid($(this));
@@ -21,8 +22,48 @@ var main = {
     $("#reinput-password").on("keyup paste", function () {
       _this.passwordCompare($(this));
     });
+    $("#email").on("keyup paste", function () {
+      _this.emailValid($(this));
+      _this.emailCheck($(this));
+    });
   },
 
+  //폼 유효성 검사
+  checkForm: function () {
+    if (!$("#login").hasClass("is-valid")) {
+      alert("아이디가 유효하지 않습니다.");
+      $("#login").focus();
+      return;
+    }
+
+    if (!$("#nickname").hasClass("is-valid")) {
+      alert("닉네임이 유효하지 않습니다.");
+      $("#login").focus();
+      return;
+    }
+
+    if (!$("#password").hasClass("is-valid")) {
+      alert("비밀번호가 유효하지 않습니다.");
+      $("#password").focus();
+      return;
+    }
+
+    if (!$("#reinput-password").hasClass("is-valid")) {
+      alert("비밀번호가 일치하지 않습니다.");
+      $("#reinput-password").focus();
+      return;
+    }
+
+    if (!$("#email").hasClass("is-valid")) {
+      alert("이메일이 유효하지 않습니다.");
+      $("#email").focus();
+      return;
+    }
+
+    main.createUser();
+  },
+
+  //유저 생성 요청
   createUser: function () {
     var data = {
       login: $("#login").val(),
@@ -71,17 +112,17 @@ var main = {
 
   //아이디 중복 검사
   loginCheck: function (input) {
+    if (timer) {
+      clearTimeout(timer);
+    }
     //유효하지 않은 아이디는 중복 검사하지 않음
     if (!isLoginValid || input.val() == "") {
       return;
     }
-    if (timer) {
-      clearTimeout(timer);
-    }
     timer = setTimeout(function () {
       $.ajax({
         type: "GET",
-        url: "/user/check/" + input.val(),
+        url: "/user/loginCheck/" + input.val(),
         contentType: "application/json; charset=utf-8",
         success: function (result) {
           //중복된 아이디 존재
@@ -107,7 +148,7 @@ var main = {
           alert("서버 요청에 실패했습니다.");
         },
       });
-    }, 200);
+    }, 500);
   },
 
   //닉네임 유효성 검사
@@ -181,6 +222,69 @@ var main = {
         .addClass("invalid-feedback");
       $("#reinput-password-feedback").html("비밀번호가 일치하지 않습니다.");
     }
+  },
+
+  //이메일 유효성 검사
+  emailValid: function (input) {
+    var emailRegType = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+    if (emailRegType.test(input.val())) {
+      //유효한 이메일
+      input.removeClass("is-invalid").addClass("is-valid");
+      $("#email-feedback")
+        .removeClass("invalid-feedback")
+        .addClass("valid-feedback");
+      $("#email-feedback").html("");
+      isEmailValid = true;
+    } else {
+      //유효하지 않은 이메일
+      input.removeClass("is-valid").addClass("is-invalid");
+      $("#email-feedback")
+        .removeClass("valid-feedback")
+        .addClass("invalid-feedback");
+      $("#email-feedback").html("이메일이 유효하지 않습니다.");
+      isEmailValid = false;
+    }
+  },
+
+  //중복 이메일 체크
+  emailCheck: function (input) {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    //유효하지 않은 이메일에 대해서는 중복체크 하지 않음
+    if (!isEmailValid) {
+      return;
+    }
+
+    timer = setTimeout(function () {
+      $.ajax({
+        type: "GET",
+        url: "/user/emailCheck/" + input.val(),
+        contentType: "application/json; charset=utf-8",
+        success: function (result) {
+          //중복된 이메일 존재
+          if (result == 1) {
+            //사용할 수 없는 이메일
+            input.removeClass("is-valid").addClass("is-invalid");
+            $("#email-feedback")
+              .removeClass("valid-feedback")
+              .addClass("invalid-feedback");
+            $("#email-feedback").html("이미 사용 중인 이메일입니다.");
+          } else {
+            //사용 가능한 이메일
+            input.removeClass("is-invalid").addClass("is-valid");
+            $("#email-feedback")
+              .removeClass("invalid-feedback")
+              .addClass("valid-feedback");
+            $("#email-feedback").html("사용 가능한 이메일입니다.");
+          }
+        },
+        error: function (error) {
+          alert("서버 요청에 실패했습니다.");
+        },
+      });
+    }, 500);
   },
 };
 

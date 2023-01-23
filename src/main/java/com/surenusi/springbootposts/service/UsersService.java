@@ -25,10 +25,17 @@ public class UsersService {
         return new UsersInfoResponseDto(usersRepository.findById(userId).get());
     }
 
-    //유저 아이디 중복 체크
+    //유저 아이디, 이메일 중복체크
     @Transactional(readOnly = true)
-    public int countUsers(String userLogin) {
-        return usersRepository.countByLogin(userLogin);
+    public int countUsers(String column, String data) {
+        if(column == "login") {
+            return usersRepository.countByLogin(data);
+        }
+        else if(column == "email") {
+            return usersRepository.countByEmail(data);
+        }
+
+        return -1;
     }
 
 
