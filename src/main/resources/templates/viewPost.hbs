@@ -17,7 +17,11 @@
       <nav>
         <div class="nav-home">홈</div>
         <div class="nav-button-container">
-          <div class="button button-secondary">회원가입</div>
+          <div
+            class="button button-secondary"
+            data-bs-toggle="modal"
+            data-bs-target="#createUsersModal"
+          >회원가입</div>
           <div class="button button-primary">로그인</div>
         </div>
       </nav>
@@ -101,6 +105,81 @@
         </div>
       {{/post}}
     </main>
+
+    {{! 회원가입 Modal }}
+    <div
+      class="modal fade"
+      id="createUsersModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="createUsersModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title"
+              id="createUsersModal"
+              style="color: black;"
+            >회원가입</h5>
+          </div>
+          <div class="modal-body">
+            <form class="row g-3">
+              <div class="col-md-6 mb-3">
+                <label for="login" class="modal-col">아이디</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="login"
+                  placeholder="아이디(6~12자 이내, 영문, 숫자 사용 가능)"
+                />
+                <div id="login-feedback"></div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="nickname" class="modal-col">닉네임</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nickname"
+                  placeholder="닉네임(2~20자 이내, 영문, 숫자, 한글 사용 가능)"
+                />
+                <div id="nickname-feedback"></div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="password" class="modal-col">비밀번호</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="비밀번호(6~24자 이내, 영문, 숫자, 특수문자 사용 가능)"
+                />
+                <div id="password-feedback"></div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="reinput-password" class="modal-col">비밀번호 재입력</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="reinput-password"
+                />
+                <div id="reinput-password-feedback"></div>
+              </div>
+              <div class="col-md-12 mb-3">
+                <label for="email" class="modal-col">이메일</label>
+                <input type="email" class="form-control" id="email" />
+                <div id="email-feedback"></div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div class="button button-warn" data-bs-dismiss="modal">취소</div>
+            <div class="button button-primary" id="btn-create-user">가입</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer>
     </footer>
 
@@ -110,5 +189,6 @@
 
     <!--custom js-->
     <script src="/js/app/viewPost.js"></script>
+    <script src="/js/app/global.js"></script>
   </body>
 </html>

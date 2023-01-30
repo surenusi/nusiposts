@@ -3,13 +3,29 @@ package com.surenusi.springbootposts.dto.user;
 import com.surenusi.springbootposts.domain.Users;
 import lombok.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UsersSaveRequestDto {
 
+    @NotBlank
+    @Pattern(regexp = "[A-Za-z0-9]{6,12}")
     private String login;
+
+    @NotBlank
+    @Pattern(regexp = "[A-Za-z0-9`~!@#$%^&*()-_=+]{6,24}")
     private String password;
+
+    @NotBlank
+    @Pattern(regexp = "[A-Za-z0-9ㄱ-ㅎ가-힣]{2,20}")
     private String nickname;
+
+    @NotBlank
+    @Email
     private String email;
 
     @Builder
