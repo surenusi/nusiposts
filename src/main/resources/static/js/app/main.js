@@ -13,6 +13,10 @@ var main = {
       content: $("#content").val(),
     };
 
+    $("#title-feedback").html("");
+    $("#author-feedback").html("");
+    $("#content-feedback").html("");
+
     $.ajax({
       type: "POST",
       url: "/post",
@@ -23,8 +27,10 @@ var main = {
         location.reload();
       },
       error: function (error) {
-        alert("글 등록에 실패하였습니다.");
-        console.log(error);
+        var errorMessage = error.responseJSON;
+        $("#title-feedback").html(errorMessage.title);
+        $("#author-feedback").html(errorMessage.author);
+        $("#content-feedback").html(errorMessage.content);
       },
     });
   },
