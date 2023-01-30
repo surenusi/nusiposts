@@ -3,12 +3,19 @@ package com.surenusi.springbootposts.dto.posts;
 import com.surenusi.springbootposts.domain.Posts;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostsSaveRequestDto {
 
+    @NotBlank
     private String title;
+
+    @NotBlank
     private String content;
+
+    @NotBlank
     private String author;
 
     @Builder
