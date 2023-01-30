@@ -10,6 +10,8 @@ import com.surenusi.springbootposts.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 public class WebRestController {
@@ -33,7 +35,7 @@ public class WebRestController {
     }
 
     @PostMapping("/user")
-    public Long createUsers(@RequestBody UsersSaveRequestDto requestDto) { return usersService.createUsers(requestDto); }
+    public Long createUsers(@RequestBody @Valid UsersSaveRequestDto requestDto) { return usersService.createUsers(requestDto); }
 
     @PutMapping("/user/{userId}")
     public Long updateUsers(@PathVariable(name = "userId") Long userId,

@@ -38,7 +38,7 @@ var main = {
 
     if (!$("#nickname").hasClass("is-valid")) {
       alert("닉네임이 유효하지 않습니다.");
-      $("#login").focus();
+      $("#nickname").focus();
       return;
     }
 
