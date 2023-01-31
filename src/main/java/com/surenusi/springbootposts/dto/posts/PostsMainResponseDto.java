@@ -2,9 +2,12 @@ package com.surenusi.springbootposts.dto.posts;
 
 import com.surenusi.springbootposts.common.Util;
 import com.surenusi.springbootposts.domain.Posts;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostsMainResponseDto {
 
     private Long id;
