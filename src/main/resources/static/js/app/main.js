@@ -16,6 +16,9 @@ var main = {
     $("#title-feedback").html("");
     $("#author-feedback").html("");
     $("#content-feedback").html("");
+    $("#title").removeClass("is-invalid");
+    $("#author").removeClass("is-invalid");
+    $("#content").removeClass("is-invalid");
 
     $.ajax({
       type: "POST",
@@ -31,6 +34,9 @@ var main = {
         $("#title-feedback").html(errorMessage.title);
         $("#author-feedback").html(errorMessage.author);
         $("#content-feedback").html(errorMessage.content);
+        $("#title").addClass("is-invalid");
+        $("#author").addClass("is-invalid");
+        $("#content").addClass("is-invalid");
       },
     });
   },
