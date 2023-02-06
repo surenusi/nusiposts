@@ -56,4 +56,12 @@ public class UsersService {
 
         return;
     }
+
+    //유저 로그인
+    @Transactional(readOnly = true)
+    public Users loginUsers(String userLogin, String userPwd) {
+        return usersRepository.findByLogin(userLogin)
+                .filter(u -> u.getPassword().equals(userPwd))
+                .orElse(null);
+    }
 }

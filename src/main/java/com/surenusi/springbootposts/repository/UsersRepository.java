@@ -11,4 +11,7 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     //유저 이메일 중복 체크
     public int countByEmail(String email);
+
+    //유저 로그인
+    public Optional<Users> findByLogin(String login);
 }
