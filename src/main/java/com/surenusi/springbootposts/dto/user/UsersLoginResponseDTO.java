@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 public class UsersLoginResponseDTO {
 
     private String login;
+    private String nickname;
 
     public UsersLoginResponseDTO(Users users) {
         this.login = users.getLogin();
+        this.nickname = users.getNickname();
     }
 }

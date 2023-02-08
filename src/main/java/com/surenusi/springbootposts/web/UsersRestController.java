@@ -44,16 +44,15 @@ public class UsersRestController {
     }
 
     //유저 로그인
-    @PostMapping("/user/login")
-    public UsersLoginResponseDTO loginUsers(@Valid UsersLoginRequestDTO requestDTO) {
-        try{
-            //로그인 성공
+    @PostMapping("/user/sign-in")
+    public UsersLoginResponseDTO loginUsers(@RequestBody @Valid UsersLoginRequestDTO requestDtO) {
+        //로그인 성공
+        try {
             return new UsersLoginResponseDTO(
-                    usersService.loginUsers(requestDTO.getLogin(), requestDTO.getPassword())
-            );
+                    usersService.loginUsers(requestDtO.getLogin(), requestDtO.getPassword()));
         }
+        //로그인 실패
         catch(Exception e) {
-            //로그인 실패
             return null;
         }
     }
