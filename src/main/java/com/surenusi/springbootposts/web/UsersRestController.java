@@ -10,41 +10,42 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
+@RequestMapping("/user")
 @RestController
 @RequiredArgsConstructor
 public class UsersRestController {
 
     private final UsersService usersService;
 
-    @PostMapping("/user")
+    @PostMapping()
     public Long createUsers(@RequestBody @Valid UsersSaveRequestDto requestDto) { return usersService.createUsers(requestDto); }
 
-    @PutMapping("/user/{userId}")
+    @PutMapping("/{userId}")
     public Long updateUsers(@PathVariable(name = "userId") Long userId,
                             @RequestBody UsersUpdateRequestDto requestDto) {
 
         return usersService.updateUsers(userId, requestDto);
     }
 
-    @DeleteMapping("/user/{userId}")
+    @DeleteMapping("/{userId}")
     public void deleteUsers(@PathVariable(name = "userId") Long userId) {
         usersService.deleteUsers(userId);
     }
 
     //유저 아이디 중복 체크
-    @GetMapping("/user/loginCheck/{userLogin}")
+    @GetMapping("/loginCheck/{userLogin}")
     public int checkUsersLoginOverlap(@PathVariable(name = "userLogin") String userLogin) {
         return usersService.countUsers("login", userLogin);
     }
 
     //유저 이메일 중복 체크
-    @GetMapping("/user/emailCheck/{userEmail}")
+    @GetMapping("/emailCheck/{userEmail}")
     public int checkUsersEmailOverlap(@PathVariable(name = "userEmail") String userEmail) {
         return usersService.countUsers("email", userEmail);
     }
 
     //유저 로그인
-    @PostMapping("/user/sign-in")
+    @PostMapping("/sign-in")
     public UsersLoginResponseDTO loginUsers(@RequestBody @Valid UsersLoginRequestDTO requestDtO) {
         //로그인 성공
         try {
