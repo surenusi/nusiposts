@@ -1,11 +1,13 @@
 package com.surenusi.springbootposts.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,7 +21,7 @@ public class Users extends BaseTimeEntity {
     @Column(unique = true, length = 12)
     private String login;
 
-    @Column(length = 24)
+    @Column(length = 60)
     private String password;
 
     @Column(length = 20)
@@ -28,12 +30,25 @@ public class Users extends BaseTimeEntity {
     @Column(unique = true)
     private String email;
 
+    @JsonIgnore
+    @Column
+    private boolean activated;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
+    private Set<Authority> authorities;
+
     @Builder
-    public Users(String login, String password, String nickname, String email) {
+    public Users(String login, String password, String nickname, String email,
+                 boolean activated) {
         this.login = login;
         this.password = password;
         this.nickname = nickname;
         this.email = email;
+        this.activated = activated;
     }
 
     //유저 정보 수정 비즈니스 로직
