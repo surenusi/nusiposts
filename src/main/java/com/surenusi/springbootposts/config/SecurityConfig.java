@@ -4,6 +4,7 @@ import com.surenusi.springbootposts.jwt.JwtAccessDeniedHandler;
 import com.surenusi.springbootposts.jwt.JwtAuthenticationEntryPoint;
 import com.surenusi.springbootposts.jwt.JwtSercurityConfig;
 import com.surenusi.springbootposts.jwt.TokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,19 +18,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-
-    public SecurityConfig(TokenProvider tokenProvider,
-                          JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-                          JwtAccessDeniedHandler jwtAccessDeniedHandler) {
-        this.tokenProvider = tokenProvider;
-        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -58,8 +52,18 @@ public class SecurityConfig {
                 //권한 설정
                 .and()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/sign-in").permitAll()
+                //리소스
+                .antMatchers(
+                        "/css/**",
+                        "/js/**"
+                ).permitAll()
+                //허용url
+                .antMatchers(
+                        "/",
+                        "/sign-in",
+                        "/user",
+                        "/post/**"
+                ).permitAll()
                 .anyRequest().authenticated()
 
                 .and()
