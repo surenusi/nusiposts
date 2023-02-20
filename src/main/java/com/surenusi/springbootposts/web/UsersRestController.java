@@ -1,6 +1,5 @@
 package com.surenusi.springbootposts.web;
 
-import com.surenusi.springbootposts.domain.Users;
 import com.surenusi.springbootposts.dto.user.UsersLoginRequestDTO;
 import com.surenusi.springbootposts.dto.user.UsersLoginResponseDTO;
 import com.surenusi.springbootposts.dto.user.UsersSaveRequestDto;
@@ -23,7 +22,6 @@ public class UsersRestController {
     @PutMapping("/{userId}")
     public Long updateUsers(@PathVariable(name = "userId") Long userId,
                             @RequestBody UsersUpdateRequestDto requestDto) {
-
         return usersService.updateUsers(userId, requestDto);
     }
 
