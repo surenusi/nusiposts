@@ -30,7 +30,6 @@ public class Users extends BaseTimeEntity {
     @Column(unique = true)
     private String email;
 
-    @JsonIgnore
     @Column
     private boolean activated;
 
@@ -43,12 +42,13 @@ public class Users extends BaseTimeEntity {
 
     @Builder
     public Users(String login, String password, String nickname, String email,
-                 boolean activated) {
+                 boolean activated, Set<Authority> authorities) {
         this.login = login;
         this.password = password;
         this.nickname = nickname;
         this.email = email;
         this.activated = activated;
+        this.authorities = authorities;
     }
 
     //유저 정보 수정 비즈니스 로직

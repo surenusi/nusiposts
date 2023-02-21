@@ -27,9 +27,9 @@ public class WebController {
         return "viewPost";
     }
 
-    @GetMapping("/user/{userId}")
-    public String readUsers(@PathVariable(name = "userId") Long userId, Model model) {
-        model.addAttribute("user", usersService.readUsers(userId));
-        return "userInfo";
-    }
+//    @GetMapping("/user/info/{userId}")
+//    public String readUsers(@PathVariable(name = "userId") Long userId, Model model) {
+//        model.addAttribute("user", usersService.readUsers(userId));
+//        return "userInfo";
+//    }
 }

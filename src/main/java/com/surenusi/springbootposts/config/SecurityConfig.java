@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -39,10 +39,10 @@ public class SecurityConfig {
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
 
-                .and()
-                .headers()
-                .frameOptions()
-                .sameOrigin()
+//                .and()
+//                .headers()
+//                .frameOptions()
+//                .sameOrigin()
 
                 //세션 설정
                 .and()
@@ -61,9 +61,11 @@ public class SecurityConfig {
                 .antMatchers(
                         "/",
                         "/sign-in",
-                        "/user",
-                        "/post/**"
+                        "/post/**",
+                        "/user"
                 ).permitAll()
+                .antMatchers("/user/info").access("hasAnyRole('ADMIN','USER')")
+                .antMatchers("/user/info/**").access("hasRole('ADMIN')")
                 .anyRequest().authenticated()
 
                 .and()

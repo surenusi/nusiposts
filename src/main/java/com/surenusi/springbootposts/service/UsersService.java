@@ -1,28 +1,49 @@
 package com.surenusi.springbootposts.service;
 
+import com.surenusi.springbootposts.common.SecurityUtil;
+import com.surenusi.springbootposts.domain.Authority;
 import com.surenusi.springbootposts.domain.Users;
-import com.surenusi.springbootposts.dto.user.UsersInfoResponseDto;
 import com.surenusi.springbootposts.dto.user.UsersSaveRequestDto;
 import com.surenusi.springbootposts.dto.user.UsersUpdateRequestDto;
 import com.surenusi.springbootposts.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collections;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UsersService {
 
     private final UsersRepository usersRepository;
+    private final PasswordEncoder passwordEncoder;
 
     //회원가입
     @Transactional
-    public Long createUsers(UsersSaveRequestDto requestDto) { return usersRepository.save(requestDto.toEntity()).getId(); }
+    public Long createUsers(UsersSaveRequestDto requestDto) {
+        //회원 중복 여부 체크
+        if(usersRepository.findByLogin(requestDto.getLogin()).orElse(null) != null) {
+            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
+        }
 
-    //유저 정보 조회
-    @Transactional(readOnly = true)
-    public UsersInfoResponseDto readUsers(Long userId) {
-        return new UsersInfoResponseDto(usersRepository.findById(userId).get());
+        //회원 권한 설정
+        Authority authority = Authority.builder()
+                .authorityName("ROLE_USER")
+                .build();
+
+        Users users = Users.builder()
+                .login(requestDto.getLogin())
+                .password(passwordEncoder.encode(requestDto.getPassword()))
+                .nickname(requestDto.getNickname())
+                .email(requestDto.getEmail())
+                .authorities(Collections.singleton(authority))
+                .activated(true)
+                .build();
+
+        return usersRepository.save(users).getId();
     }
 
     //유저 아이디, 이메일 중복체크
@@ -38,7 +59,6 @@ public class UsersService {
         return -1;
     }
 
-
     //유저 정보 수정
     @Transactional
     public Long updateUsers(Long userId, UsersUpdateRequestDto requestDto) {
@@ -48,7 +68,6 @@ public class UsersService {
         return users.getId();
     }
 
-
     //유저 삭제
     @Transactional
     public void deleteUsers(Long userId) {
@@ -57,11 +76,15 @@ public class UsersService {
         return;
     }
 
-    //유저 로그인
+    //유저, 권한 정보 조회(관리자)
     @Transactional(readOnly = true)
-    public Users loginUsers(String userLogin, String userPwd) {
-        return usersRepository.findByLogin(userLogin)
-                .filter(u -> u.getPassword().equals(userPwd))
-                .orElse(null);
+    public Optional<Users> getUsersWithAuthorities(String login) {
+        return usersRepository.findOneWithAuthoritiesByLogin(login);
+    }
+
+    //유저, 권한 정보 조회
+    @Transactional(readOnly = true)
+    public Optional<Users> getMyUsersWithAuthorities() {
+        return SecurityUtil.getCurrentUsername().flatMap(usersRepository::findOneWithAuthoritiesByLogin);
     }
 }
