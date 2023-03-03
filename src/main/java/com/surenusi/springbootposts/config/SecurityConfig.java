@@ -34,8 +34,9 @@ public class SecurityConfig {
     @Bean
     protected WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-                .antMatchers("/js/**")
-                .antMatchers("/css/**");
+                .antMatchers("/js/**")      //정적리소스
+                .antMatchers("/css/**")
+                .antMatchers("/favicon.ico");
     }
 
     @Bean
@@ -61,12 +62,12 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 //허용url
-                .antMatchers(
-                        "/",
-                        "/sign-in",
-                        "/post/**",
-                        "/user"
-                ).permitAll()
+                .antMatchers("/").permitAll()           //홈페이지
+                .antMatchers("/post/**").permitAll()    //post api
+                .antMatchers("/sign-in").permitAll()    //로그인 api
+                .antMatchers("/user/loginCheck/**",
+                        "/user/emailCheck/**").permitAll() //유저 아이디, 이메일 중복체크
+                .antMatchers("/user").permitAll()       //회원가입 api
                 .antMatchers("/user/info").access("hasAnyRole('ADMIN','USER')")
                 .antMatchers("/user/info/**").access("hasRole('ADMIN')")
                 .anyRequest().authenticated()
