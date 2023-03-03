@@ -1,7 +1,6 @@
 package com.surenusi.springbootposts.dto.authority;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,10 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TokenDto {
 
-    private String token;
+    private String accessToken;
 
-    @Builder
-    public TokenDto(String token) {
-        this.token = token;
+    public TokenDto(String accessToken) {
+        this.accessToken = accessToken;
     }
 }
