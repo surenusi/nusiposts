@@ -37,4 +37,9 @@ public class Posts extends BaseTimeEntity {
         this.title = title;
         this.content = content;
     }
+
+    //조회수 증가
+    public void updateViewCount() {
+        this.viewCount++;
+    }
 }
