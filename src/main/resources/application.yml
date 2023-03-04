@@ -1,16 +1,25 @@
 spring:
   profiles:
-    active: local
+    active:
+      local
 
 #Local
 ---
 spring:
+  config:
+    activate:
+      on-profile:
+        - local
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/springboot_posts?characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: root
-
+  jwt:
+    token:
+      header: Authorization
+      secret: ebb9fccd6d3274699da086da1bbaa16a4e38ed1f968aa6333bd0bae202ff7bd41fa694c3bc609814d45a74f17347ad500beb2e70faeef0fa201117508cc714f9
+      token-validity-in-seconds: 86400
   jpa:
     hibernate:
       ddl-auto: create
@@ -19,9 +28,25 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
-  config:
-    activate:
-      on-profile: local
+logging:
+  level:
+    root: debug
+---
+spring:
+  config.activate.on-profile: prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
 
 
 

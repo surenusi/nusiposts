@@ -9,6 +9,9 @@ var main = {
     $("#btn-create-user").on("click", function () {
       _this.checkForm();
     });
+    $("#btn-signIn-user").on("click", function () {
+      _this.signInUser();
+    });
     $("#login").on("keyup paste", function () {
       _this.loginValid($(this));
       _this.loginCheck($(this));
@@ -78,8 +81,33 @@ var main = {
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify(data),
       success: function () {
-        alert("회원이 되신 것을 축하드립니다!");
         location.reload();
+        alert("회원이 되신 것을 축하드립니다!");
+      },
+      error: function (error) {
+        alert("서버 요청에 실패하였습니다.");
+      },
+    });
+  },
+
+  //유저 로그인
+  signInUser: function () {
+    var data = {
+      login: $("#sign-in-login").val(),
+      password: $("#sign-in-password").val(),
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "/sign-in",
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify(data),
+      datatype: "json",
+      success: function (result) {
+        //토큰 local storage 저장
+        window.localStorage.setItem("accessToken", result.accessToken);
+        location.reload();
+        alert("로그인에 성공하셨습니다.");
       },
       error: function (error) {
         alert("서버 요청에 실패하였습니다.");

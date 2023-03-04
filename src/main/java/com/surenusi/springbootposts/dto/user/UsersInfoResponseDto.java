@@ -1,29 +1,28 @@
 package com.surenusi.springbootposts.dto.user;
 
 import com.surenusi.springbootposts.common.Util;
+import com.surenusi.springbootposts.domain.Authority;
 import com.surenusi.springbootposts.domain.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UsersInfoResponseDto {
 
-    private Long id;
     private String login;
-    private String password;
     private String nickname;
-    private String email;
+    private Set<Authority> authorities;
     private String createdDate;
     private String modifiedDate;
 
     public UsersInfoResponseDto(Users users) {
-        id = users.getId();
         login = users.getLogin();
-        password = users.getPassword();
         nickname = users.getNickname();
-        email = users.getEmail();
+        authorities = users.getAuthorities();
         createdDate = Util.toStringDateTime(users.getCreatedDate());
         modifiedDate = Util.toStringDateTime(users.getModifiedDate());
     }

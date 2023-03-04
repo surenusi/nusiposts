@@ -180,6 +180,55 @@
       </div>
     </div>
 
+    {{! 로그인 Modal }}
+    <div
+      class="modal fade"
+      id="signInUsersModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="signInUsersModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" style="color: black;">
+              로그인
+            </h5>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="sign-in-login" style="color: black;">아이디</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="sign-in-login"
+                  placeholder="아이디"
+                />
+              </div>
+              <div class="mb-3">
+                <label
+                  for="sign-in-password"
+                  style="color: black;"
+                >비밀번호</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="sign-in-password"
+                  placeholder="비밀번호"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div class="button button-warn" data-bs-dismiss="modal">취소</div>
+            <div class="button button-primary" id="btn-signIn-user">로그인</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer>
     </footer>
 
