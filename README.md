@@ -162,7 +162,7 @@
   - 요청으로 들어온 ```LoginDto```의 ```login(username)```과```password```를 파라미터로 받아 ```UsernamePasswordAuthenticationToken```객체를 생성한다.
   - ```UsernamePasswordAuthenticationToken```객체를 파라미터로 받아 ```Authentication```객체를 생성한다.
   - ```authenticate()``` 메소드가 실행될 때, ```CustomUserDetailsService.java```의 ```loadUserByUsername()```메소드가 실행되어 권한 정보를 가져온다.
-  - 인증 정보를 담고 있는 ```Authentication``` 객체를 ```SecuritiContext```에 저장한다.
+  - 인증 정보를 담고 있는 ```Authentication``` 객체를 ```SecurityContext```에 저장한다.
   - ```Authentication``` 객체를 파라미터로 받아 ```createToken()```메소드를 실행시켜 JWT토큰을 생성한 후 사용자에게 리턴한다.
 
 ### 실행 결과
@@ -420,3 +420,13 @@
 - 관리자 권한을 가지지 못한 사용자는 ```/user/info/**``` 요청에 대해 ```JwtAccessDeniedHandler.java```에 의해 403에러를 리턴 받는다.
 
 # 3. 프로젝트 후기
+
+이번 프로젝트를 통해 REST API를 직접 구현하면서 그 개념에 대해 조금 더 이해할 수 있게 되었고, 글로만 읽던 JPA(Spring Data JPA)의 장단점을 몸소 깨달을 수 있었다.
+다만 설계와 분석을 제대로 하지 않은 탓에 Posts와 Users테이블이 전혀 관계가 없는 테이블이 된 것이 아쉽다.
+다음 프로젝트를 진행할 때는 분석과 설계를 제대로 진행하여 제대로 된 관계형 데이터베이스를 구축해야겠다.
+JWT에 대해서도 아쉬운 것이 많다. 
+클라이언트와 서버가 분리된 REST API를 개발하기 위해 무상태성을 유지하는 인증 방식인 JWT를 택했던 것인데, 클라이언트와 서버가 강결합된 SSR방식에서는 맞지 않았던 것 같다.
+이렇게 보면 REST API 서버를 개발했다고 보기 힘들 것 같고...
+무엇보다 SSR+JWT는 예제 자체가 거의 없어 참고할 자료도 구하기도 힘들었다...
+또, JWT를 발급하고 LocalStorage에 저장하기만 하고 있는데 제대로 사용도 못 해본 것도 아쉬운데다가 보안에도 좋지 않다.
+AccessToken + RefreshToken을 통해 만료기간이 짧은 AccessToken을 RefreshToken을 통해 재발급해주는 방법 등을 통해 보안을 좀 더 신경써봐야겠다.
