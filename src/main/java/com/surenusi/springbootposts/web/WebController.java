@@ -15,14 +15,28 @@ public class WebController {
     private final PostsService postsService;
     private final UsersService usersService;
 
+    /**
+     * 게시글 전체 조회
+     * @param model
+     * @return main.hbs
+     */
     @GetMapping("/")
     public String readAllPosts(Model model) {
         model.addAttribute("posts", postsService.readAllPosts());
         return "main";
     }
 
+    /**
+     * 게시글 상세 조회
+     * 조회수 증가
+     * @param postId
+     * @param model
+     * @return viewPost.hbs
+     */
     @GetMapping("/post/{postId}")
     public String readPost(@PathVariable(name = "postId") Long postId, Model model) {
+        //조회수 증가
+        postsService.updatePostsViewCount(postId);
         model.addAttribute("post", postsService.readPosts(postId));
         return "viewPost";
     }

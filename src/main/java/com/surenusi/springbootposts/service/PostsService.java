@@ -19,13 +19,13 @@ public class PostsService {
 
     private final PostsRepository postsRepository;
 
-    //게시글 쓰기
+    /* 게시글 쓰기 */
     @Transactional
     public Long createPosts(PostsSaveRequestDto requestDto) {
         return postsRepository.save(requestDto.toEntity()).getId();
     }
 
-    //게시글 전체 조회
+    /* 게시글 전체 조회 */
     @Transactional(readOnly = true)
     public List<PostsMainResponseDto> readAllPosts() {
         return postsRepository.findByOrderByIdDesc()
@@ -33,13 +33,14 @@ public class PostsService {
                 .collect(Collectors.toList());
     }
 
-    //게시글 상세 조회
+    /* 게시글 상세 조회 */
     @Transactional(readOnly = true)
     public PostsViewResponseDto readPosts(Long postId) {
-        return new PostsViewResponseDto(postsRepository.findById(postId).get());
+        Posts posts = postsRepository.findById(postId).get();
+        return new PostsViewResponseDto(posts);
     }
 
-    //게시글 수정
+    /* 게시글 수정 */
     @Transactional
     public Long updatePosts(Long id, PostsUpdateRequestDto requestDto) {
         Posts posts = postsRepository.findById(id).get();
@@ -48,11 +49,19 @@ public class PostsService {
         return posts.getId();
     }
 
-    //게시글 삭제
+    /* 게시글 삭제 */
     @Transactional
     public void deletePosts(Long postId) {
         postsRepository.deleteById(postId);
 
+        return;
+    }
+
+    /* 게시글 조회수 증가 */
+    @Transactional
+    public void updatePostsViewCount(Long postId) {
+        Posts posts = postsRepository.findById(postId).get();
+        posts.updateViewCount();
         return;
     }
 }
