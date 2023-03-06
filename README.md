@@ -1,5 +1,5 @@
 # nusiposts
-> Spring Boot, REST API, Spring Data JPA, Spring Security, JWT등을 적용해 연습해보기 위해 시작한 프로젝트
+  > Spring Boot, REST API, Spring Data JPA, Spring Security, JWT등을 적용해 연습해보기 위해 시작한 프로젝트
 
 # 1.프로젝트 개요
 
@@ -198,9 +198,9 @@
   - ```@EnableWebSecurity```을 통해 웹 보안을 활성화하고, 모든 api요청을 실행하기 전 인증 절차를 요구한다.
   - ```antMatchers.permitAll()``` 설정을 통해 인증 절차가 필요하지 않은 요청을 설정한다.
   - WebSecurityConfigurerAdapter를 상속해 구현하는 방식은 deprecated되었기에 SecurityFilterChain을 반환하고 빈으로 등록함으로써 컴포넌트 기반의 보안 설정을 구현했다.
-  > https://jaehoney.tistory.com/249
+    > https://jaehoney.tistory.com/249
   - ```/user```, ```/user/info/**``` 요청에 대해서는 권한 기반으로 인증 절차를 요구한다.
-  > /user 요청은 로그인한 사용자, /user/info/** 요청은 관리자 권한을 가진 사용자
+    > /user 요청은 로그인한 사용자, /user/info/** 요청은 관리자 권한을 가진 사용자
   
 ```JWTFilter.java```
 ```java
@@ -359,7 +359,7 @@
   - 권한을 기반으로 ```SecurityConfig.java```의 인증 절차를 통과하면 요청을 실행한다. 이 때, 인증 정보는 SecurityContext에 저장되어 있다.
   - ```/user/info/**``` 요청은 관리자가 특정 사용자의 정보를 리턴 받을 수 있으며, 요청받은 ```login(username)```을 파라미터로 사용자의 정보를 반환 받는다.
   - ```/user/info``` 요청은 로그인한 사용자가 자신의 정보를 리턴 받을 수 있으며, ```SecurityContext```에 저장된 자신의 인증 정보를 ```SecurityUtil.java```에 구현한 ```getCurrentUsername()```메소드를 실행하여 가져와 사용자 정보를 얻을 수 있다.
-  > getCurrentUsername()메소드에서 SecurityContextHolder.getContext().getAuthentication() 를 실행하여 인증 정보를 가져온다.
+    > getCurrentUsername()메소드에서 SecurityContextHolder.getContext().getAuthentication() 를 실행하여 인증 정보를 가져온다.
   
 ```JwtAccessDeniedHandler.java```
 ```java
