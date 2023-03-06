@@ -202,7 +202,7 @@
   - ```/user```, ```/user/info/**``` 요청에 대해서는 권한 기반으로 인증 절차를 요구한다.
     > /user 요청은 로그인한 사용자, /user/info/** 요청은 관리자 권한을 가진 사용자
   
-```JWTFilter.java```
+```JwtFilter.java```
 ```java
     ...
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
